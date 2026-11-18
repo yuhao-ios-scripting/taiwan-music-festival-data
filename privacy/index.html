@@ -30,12 +30,12 @@
 <ul>
   <li><strong>位置（選用）</strong>：只在你打開場域地圖並允許時使用，用來在地圖上顯示你的位置與到各地點的距離。位置只在裝置上使用，不會傳給開發者。</li>
   <li><strong>行事曆（選用，僅寫入）</strong>：只在你確認後，把標記「參加」的演出加入行事曆。App 無法讀取你行事曆中的既有內容。</li>
-  <li><strong>偏好設定</strong>：你追蹤的表演者、參加的演出與顯示偏好，儲存在你的裝置上（UserDefaults）；若你登入了 iCloud，這些內容會透過 Apple 的 iCloud 鍵值儲存，在你自己登入同一個 Apple 帳號的裝置間同步。同步的資料只存在你自己的 iCloud，開發者無法存取；你可以在系統設定中關閉 App 的 iCloud 同步。</li>
-  <li><strong>音樂祭資料</strong>：App 內建一份，並會在啟動、回到前景或你在設定按「檢查雲端資料更新」時，從公開網址（GitHub Pages）下載最新的音樂祭資料檔，只是讀取公開的活動資訊，不會傳送任何個人資料或裝置識別資訊；下載的資料會暫存在你的裝置上。若你使用自己的 iCloud 磁碟機提供資料檔，App 只會從你自己的 iCloud 讀取，開發者無法存取。</li>
+  <li><strong>偏好設定</strong>：你追蹤的表演者、參加的演出與顯示偏好，儲存在你的裝置上（SwiftData）；若你登入了 iCloud，這些內容會透過 Apple 的 CloudKit（你自己的私人資料庫），在你自己登入同一個 Apple 帳號的裝置間同步。同步的資料只存在你自己的 iCloud，開發者無法存取；你可以在系統設定中關閉 App 的 iCloud 同步。</li>
+  <li><strong>音樂祭資料</strong>：App 內建一份，並會在啟動、回到前景或你在設定按「檢查雲端資料更新」時，從 Apple CloudKit 的公開資料庫下載最新的音樂祭資料檔（不需要登入 iCloud），只是讀取公開的活動資訊，不會傳送任何個人資料或裝置識別資訊；下載的資料會暫存在你的裝置上。若你使用自己的 iCloud 磁碟機提供資料檔，App 只會從你自己的 iCloud 讀取，開發者無法存取。</li>
 </ul>
 
 <h2>第三方服務</h2>
-<p>地圖由 Apple 地圖（MapKit）提供，Apple 對地圖服務的資料處理適用 <a href="https://www.apple.com/legal/privacy/">Apple 隱私權政策</a>。音樂祭資料檔由 GitHub Pages 提供，下載時 GitHub 可能依其<a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">隱私聲明</a>記錄連線的 IP 位址等一般連線資訊，開發者不會取得這些資訊。App 開啟的官方網站、售票或社群連結會在對應網站上開啟，適用該網站的隱私權政策。</p>
+<p>地圖由 Apple 地圖（MapKit）提供，Apple 對地圖服務的資料處理適用 <a href="https://www.apple.com/legal/privacy/">Apple 隱私權政策</a>。音樂祭資料檔存放在 Apple CloudKit 公開資料庫，下載時 Apple 可能依其隱私權政策記錄連線的 IP 位址等一般連線資訊，開發者不會取得這些資訊。App 開啟的官方網站、售票或社群連結會在對應網站上開啟，適用該網站的隱私權政策。</p>
 
 <h2>TestFlight 測試</h2>
 <p>若你透過 TestFlight 參與測試，Apple 可能依其 TestFlight 條款，將你主動送出的回饋、截圖與當機報告提供給開發者，僅用於改進 App。</p>
@@ -63,12 +63,12 @@
 <ul>
   <li><strong>Location (optional)</strong>: used only when you open a venue map and grant permission, to show your position and distances on the map. It stays on your device and is never sent to the developer.</li>
   <li><strong>Calendar (optional, write-only)</strong>: only after you confirm, performances you mark as “Going” are added to your calendar. The app cannot read your existing events.</li>
-  <li><strong>Preferences</strong>: followed artists, performances you plan to attend and display settings are stored on your device (UserDefaults). If you are signed in to iCloud, they are synced between your own devices signed in to the same Apple Account through Apple’s iCloud key-value storage. Synced data stays in your own iCloud and the developer cannot access it; you can turn off the app’s iCloud sync in system Settings.</li>
-  <li><strong>Festival data</strong>: a copy is bundled with the app. On launch, when returning to the app, or when you tap “Check for Cloud Data Updates” in Settings, the app downloads the latest festival data file from a public URL (GitHub Pages). It only reads public event information and sends no personal data or device identifiers; the downloaded data is cached on your device. If you provide a data file through your own iCloud Drive, the app reads it only from your iCloud; the developer cannot access it.</li>
+  <li><strong>Preferences</strong>: followed artists, performances you plan to attend and display settings are stored on your device (SwiftData). If you are signed in to iCloud, they are synced between your own devices signed in to the same Apple Account through Apple’s CloudKit (your own private database). Synced data stays in your own iCloud and the developer cannot access it; you can turn off the app’s iCloud sync in system Settings.</li>
+  <li><strong>Festival data</strong>: a copy is bundled with the app. On launch, when returning to the app, or when you tap “Check for Cloud Data Updates” in Settings, the app downloads the latest festival data file from Apple’s CloudKit public database (no iCloud sign-in required). It only reads public event information and sends no personal data or device identifiers; the downloaded data is cached on your device. If you provide a data file through your own iCloud Drive, the app reads it only from your iCloud; the developer cannot access it.</li>
 </ul>
 
 <h2>Third-party services</h2>
-<p>Maps are provided by Apple Maps (MapKit) and governed by the <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>. The festival data file is served by GitHub Pages; when it is downloaded, GitHub may log general connection information such as your IP address under its <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>. The developer does not receive that information. Official website, ticketing and social links open on those sites and are governed by their own policies.</p>
+<p>Maps are provided by Apple Maps (MapKit) and governed by the <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>. The festival data file is stored in Apple’s CloudKit public database; when it is downloaded, Apple may log general connection information such as your IP address under its privacy policy. The developer does not receive that information. Official website, ticketing and social links open on those sites and are governed by their own policies.</p>
 
 <h2>TestFlight testing</h2>
 <p>If you test through TestFlight, Apple may share feedback, screenshots and crash reports you choose to submit with the developer under Apple’s TestFlight terms, used only to improve the app.</p>
